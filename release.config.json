@@ -6,12 +6,13 @@
     "@semantic-release/changelog",
     {
       "path": "@semantic-release/npm",
-      "pkgRoot": "packages/cli"
+      "pkgRoot": "packages/cli",
+      "npmPublish": true
     },
     "@semantic-release/git",
     {
       "path": "@semantic-release/exec",
-      "cmd": "pnpm version --no-git-tag-version ${nextRelease.version}"
+      "cmd": "pnpm version ${nextRelease.version} --no-git-tag-version"
     }
   ]
 }
