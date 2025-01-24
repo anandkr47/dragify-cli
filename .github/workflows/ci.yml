@@ -28,12 +28,10 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
-      - name: 'Install dependencies with pnpm'
-        run: pnpm install
-
-      - name: 'Build Core package'
+      - name: 'Build Cli package'
         run: |
           cd packages/cli
+          pnpm install
           pnpm build  # Run build script specific to the CLI package
           cd ../..
 
