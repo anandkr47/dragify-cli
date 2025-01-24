@@ -1,4 +1,4 @@
-name: Core Deployment Workflow
+name: Deployment Workflow
 
 on:
   push:
@@ -8,35 +8,31 @@ on:
 
 jobs:
   build:
-    name: '@craftfosslabs/dragifyjs Build'
+    name: '@mindfiredigital/pagebuilder Build'
     runs-on: ubuntu-latest
     permissions:
       contents: write
       packages: read
     steps:
       - name: 'Checkout repository'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Clear npm cache
-        run: npm cache clean --force
+      - name: Install pnpm
+        run: npm install -g pnpm  # Install pnpm globally
 
-      - name: 'Install dependencies with npm'
-        run: npm install
+      - name: 'Install dependencies with pnpm'
+        run: pnpm install  # Install all dependencies using pnpm
 
-      - name: 'Build CLI package'
-        run: |
-          cd packages/cli
-          npm install
-          npm run build  # Run build script specific to the CLI package
-          cd ../..
+      - name: 'Build application'
+        run: pnpm turbo run build  # Build script for all packages
 
-      - name: 'Restore changes in package-lock.json'
-        run: git restore package-lock.json
+      - name: 'Restore changes in pnpm lock'
+        run: git restore pnpm-lock.yaml  # Restore any changes in lock files if needed
 
       - name: 'Set Git user name and email'
         run: |
@@ -44,32 +40,32 @@ jobs:
           git config --local user.name "GitHub Actions"
 
   create-github-release:
-    name: Create GitHub release document and publish to npm
+    name: Create GitHub Release and Publish to NPM
     runs-on: ubuntu-latest
     permissions:
       contents: write
     needs: build
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 20
 
-      - name: Clear npm cache
-        run: npm cache clean --force
+      - name: Install pnpm
+        run: npm install -g pnpm  # Install pnpm globally
 
-      - name: Install dependencies with npm
-        run: npm install
+      - name: Install dependencies with pnpm
+        run: pnpm install
 
-      - name: Semantic Release and npm release
+      - name: Publish Package and Create GitHub Release
         run: |
-          cd packages/cli
-          npm install --frozen-lockfile
-          npm run build  # Ensure the CLI package is built before release
-          npx semantic-release
+          cd packages/cli  # Navigate to the core package directory
+          pnpm install --frozen-lockfile  # Ensure dependencies are installed
+          pnpm build  # Build the core package
+          npx semantic-release  # Run semantic release to publish and create GitHub release
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}  # Token for npm publish
+          GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB }}  # Token for GitHub release
