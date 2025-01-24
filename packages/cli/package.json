@@ -1,5 +1,5 @@
 {
-  "name": "dragifyjs-cli",
+  "name": "dragifyjs-core-cli",
   "version": "1.0.0-development",
   "description": "dragifyJS CLI tool for the plugin development",
   "bin": {
