@@ -25,18 +25,18 @@ jobs:
       - name: Clear npm cache
         run: npm cache clean --force
 
-      - name: Install pnpm
-        run: npm install -g pnpm
+      - name: 'Install dependencies with npm'
+        run: npm install
 
-      - name: 'Build Cli package'
+      - name: 'Build CLI package'
         run: |
           cd packages/cli
-          pnpm install
-          pnpm build  # Run build script specific to the CLI package
+          npm install
+          npm run build  # Run build script specific to the CLI package
           cd ../..
 
-      - name: 'Restore changes in pnpm lock'
-        run: git restore pnpm-lock.yaml
+      - name: 'Restore changes in package-lock.json'
+        run: git restore package-lock.json
 
       - name: 'Set Git user name and email'
         run: |
@@ -61,17 +61,14 @@ jobs:
       - name: Clear npm cache
         run: npm cache clean --force
 
-      - name: Install pnpm
-        run: npm install -g pnpm
-
-      - name: Install dependencies with pnpm
-        run: pnpm install
+      - name: Install dependencies with npm
+        run: npm install
 
       - name: Semantic Release and npm release
         run: |
           cd packages/cli
-          pnpm install --frozen-lockfile
-          pnpm build  # Ensure the CLI package is built before release
+          npm install --frozen-lockfile
+          npm run build  # Ensure the CLI package is built before release
           npx semantic-release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
