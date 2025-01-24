@@ -1,0 +1,23 @@
+{
+  "name": "<%= rName %>",
+  "version": "1.0.0",
+  "description": "<%= name %>",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<%= user %>/<%= rName %>.git"
+  },
+  "scripts": {
+    "start": "dragifyjs-cli serve",
+    "build": "dragifyjs-cli build",
+    "bump": "npm version patch -m 'Bump v%s'"
+  },
+  "keywords": [
+    "dragifyjs",
+    "plugin"
+  ],
+  "devDependencies": {
+    "dragifyjs-cli": "^<%= version %>"
+  },
+  "license": "<%= license %>"
+}
