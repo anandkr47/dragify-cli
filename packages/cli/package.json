@@ -1,6 +1,6 @@
 {
   "name": "dragifyjs-cli",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "dragifyJS CLI tool for the plugin development",
   "bin": {
     "dragifyjs-cli": "dist/cli.js"
