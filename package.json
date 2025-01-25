@@ -1,6 +1,6 @@
 {
   "name": "@dragifyjs/monorepo",
-  "version": "0.0.0",
+  "version": "0.0.0-dev",
   "packageMana;ger": "pnpm@9.15.2",
   "workspaces": [
     "packages/*"

@@ -27,7 +27,7 @@ interface BuildOptions {
 }
 
 /**
- * Build locale files
+ * Build locale files locally
  * @param {Object} opts
  */
 export const buildLocale = async (opts: BuildOptions = {}) => {

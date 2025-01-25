@@ -33,7 +33,7 @@ A typical **template system**, often used in applications like CMS platforms, co
 ### Using NPM
 
 ```bash
-npm i dragifyjs
+npm i dragifyjs-cli
 ```
 
 ### Using Git
