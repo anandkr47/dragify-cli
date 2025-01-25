@@ -19,10 +19,6 @@
     "patch": "npm version patch -m 'Bump v%s'",
     "test": "jest"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/CraftFossLabs/dragify-cli.git"
-  },
   "keywords": [
     "dragifyjs",
     "plugin",
@@ -58,15 +54,4 @@
     "fork-ts-checker-webpack-plugin": "^8.0.0",
     "webpack-node-externals": "^3.0.0"
   },
-  "release": {
-    "repositoryUrl": "https://github.com/CraftFossLabs/dragify-cli.git",
-    "branches": [
-      "main",
-      "next",
-      {
-        "name": "beta",
-        "prerelease": true
-      }
-    ]
-  }
 }
