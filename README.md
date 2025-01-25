@@ -1,4 +1,4 @@
-# dragifyJS cli
+# dragifyJS-CORE-cli
 
 ![dragifyjs](https://res.cloudinary.com/dhumqtbfb/image/upload/v1737644597/dragify_kdomgh.webp)
 **dragifyJS** is a free and open-source web builder framework that simplifies the creation of HTML templates for websites, newsletters, or mobile apps. It was designed primarily for use within [CMS] platforms, accelerating the creation of dynamic templates.
