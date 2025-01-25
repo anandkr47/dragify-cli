@@ -1,9 +1,9 @@
 {
   "name": "dragifyjs-core-cli",
-  "version": "0.0.0-dev",
+  "version": "0.0.0-development",
   "description": "dragifyJS CLI tool for the plugin development",
   "bin": {
-    "dragifyjs-cli": "dist/cli.js"
+    "dragifyjs-core-cli": "dist/cli.js"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -66,6 +66,13 @@
       {
         "name": "beta",
         "prerelease": true
+      }
+    ],
+    "plugins": [
+      {
+        "path": "@semantic-release/npm",
+        "npmPublish": true,
+        "allowSameVersion": true
       }
     ]
   }
