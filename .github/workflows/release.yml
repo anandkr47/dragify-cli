@@ -39,7 +39,7 @@ jobs:
           git config --local user.email "github-actions@github.com"
           git config --local user.name "GitHub Actions"
 
-  create-github-release:
+  release:
     name: Create GitHub Release and Publish to NPM
     runs-on: ubuntu-latest
     permissions:
@@ -63,12 +63,23 @@ jobs:
       - name: Install dependencies with pnpm
         run: pnpm install
 
-      - name: Publish Package and Create GitHub Release
+      - name: Build the Core Package
         run: |
-          cd packages/cli  # Navigate to the core package directory
-          pnpm install --frozen-lockfile  # Ensure dependencies are installed
-          pnpm build  # Build the core package
-          npx semantic-release  # Run semantic release to publish and create GitHub release
+          cd packages/cli
+          pnpm install --frozen-lockfile
+          pnpm build
+
+      - name: Publish Package to npm
+        run: |
+          cd packages/cli
+          pnpm publish --access public
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }} 
-          GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB }} 
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        run: |
+          echo "Creating GitHub Release"
+          git tag v$(jq -r '.version' < packages/cli/package.json)
+          git push origin --tags
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB }}
