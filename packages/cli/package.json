@@ -5,6 +5,10 @@
   "bin": {
     "dragifyjs-cli": "dist/cli.js"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "files": [
     "dist"
   ],
@@ -53,5 +57,32 @@
     "copy-webpack-plugin": "^11.0.0",
     "fork-ts-checker-webpack-plugin": "^8.0.0",
     "webpack-node-externals": "^3.0.0"
+  },
+  "release": {
+    "branches": [
+      "main",
+      "next",
+      "master",
+      "beta"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      {
+        "path": "@semantic-release/npm"
+      },
+      {
+        "path": "@semantic-release/git",
+        "assets": [
+          "package.json"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      },
+      {
+        "path": "@semantic-release/exec",
+        "cmd": "npm version ${nextRelease.version} --allow-same-version --no-git-tag-version"
+      }
+    ]
   }
 }
